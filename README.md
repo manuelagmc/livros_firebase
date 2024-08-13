@@ -23,7 +23,12 @@ Uma aplicação web para gerenciar o acervo de livros da Etec, permitindo cadast
 
 ## Contribuindo
 
-Agradecemos suas contribuições! Para colaborar, siga as instruções em .
+Agradecemos suas contribuições! Para colaborar, pode fazer Pull request.
+
+## Material de apoio.
+
+Acesse alguns tópicos para melhor entendimento em  https://g.co/gemini/share/405c3d72c372
+
 
 ## Licença
 
