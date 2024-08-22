@@ -5,7 +5,16 @@ import {
   ,signInWithEmailAndPassword 
  } from "firebase/auth";
 
+
 function LoginPage() {
+
+  const dicionario_erro = {
+     "auth/invalid-credential" : "E-mail ou senha inválida",
+     "auth/invalid-email" : "E-mail inválido",
+     "auth/email-already-in-use" : "A conta já existe ",
+
+
+  }
 
   const [loginType, setLoginType] = useState('login');
   const [userCred, setUserCred] = useState('')
@@ -17,6 +26,7 @@ function LoginPage() {
  
   function handleCriar(e){
     e.preventDefault()
+    setError('')
 
     createUserWithEmailAndPassword(auth, userCred.email, userCred.password)
     .then((userCredential) => {
@@ -29,13 +39,15 @@ function LoginPage() {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorMessage)
-      setError(error.message)
+      console.log(errorCode)
+      
+      setError(dicionario_erro[error.code] || error.message)
       // ..
     });
     }
 
     function handleEntrar(e){
+      setError('')
       e.preventDefault()
       signInWithEmailAndPassword(auth, userCred.email, userCred.password)
       .then((userCredential) => {
@@ -48,12 +60,14 @@ function LoginPage() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setError(error.message)
+        console.log(errorCode)
+        setError(dicionario_erro[error.code] || error.message)
       });
 
 
     }
-  
+
+
     return (
       <>
         <div className="container login-page">
@@ -93,6 +107,7 @@ function LoginPage() {
                       {error}
                     </div>
                   }
+
                   <p className="forgot-password">Esqueci minha senha.</p>
                   
               </form>
