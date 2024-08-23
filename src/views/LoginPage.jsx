@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { auth} from '../firebase/config.js'
 import { 
    createUserWithEmailAndPassword
-  ,signInWithEmailAndPassword 
+  ,sendPasswordResetEmail,signInWithEmailAndPassword 
  } from "firebase/auth";
 
 
@@ -12,8 +12,6 @@ function LoginPage() {
      "auth/invalid-credential" : "E-mail ou senha inválida",
      "auth/invalid-email" : "E-mail inválido",
      "auth/email-already-in-use" : "A conta já existe ",
-
-
   }
 
   const [loginType, setLoginType] = useState('login');
@@ -67,6 +65,11 @@ function LoginPage() {
 
     }
 
+    function handleRedefinirSenha(){
+      const email = prompt('Digite seu e-mail')
+      sendPasswordResetEmail(auth, email)
+      alert('E-mail enviado com instruções para a redefinição de senha')
+    } 
 
     return (
       <>
@@ -108,7 +111,7 @@ function LoginPage() {
                     </div>
                   }
 
-                  <p className="forgot-password">Esqueci minha senha.</p>
+                  <p className="forgot-password" onClick={(e)=>handleRedefinirSenha(e)}>Esqueci minha senha.</p>
                   
               </form>
           </section>
